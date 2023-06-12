@@ -13,6 +13,11 @@ dist
 dist-ssr
 coverage
 *.local
+.env
+
+# Directus mounts
+/data
+/uploads
 
 /cypress/videos/
 /cypress/screenshots/
