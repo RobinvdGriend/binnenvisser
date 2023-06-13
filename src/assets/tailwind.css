@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "Univers";
+  src: url(@/assets/fonts/UniversBold.woff2);
+  font-weight: 650;
+}
+
+@font-face {
+  font-family: "Univers";
+  src: url(@/assets/fonts/UniversRoman.woff2);
+  font-weight: 550;
+}
+
+@font-face {
+  font-family: "Alte Haas Grotesk";
+  src: url(@/assets/fonts/AlteHaasGroteskRegular.woff2);
+  font-weight: normal;
+}

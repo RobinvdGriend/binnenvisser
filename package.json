@@ -12,6 +12,9 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@directus/sdk": "^10.3.3",
+    "@vueuse/core": "^10.1.2",
+    "prettier-plugin-tailwindcss": "^0.3.0",
     "vue": "^3.3.4",
     "vue-router": "^4.2.2"
   },

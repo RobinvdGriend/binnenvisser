@@ -1,8 +1,20 @@
+import defaultTheme from 'tailwindcss/defaultTheme'
+
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   theme: {
-    extend: {}
+    extend: {
+      fontFamily: {
+        sans: ['Univers', ...defaultTheme.fontFamily.sans],
+        display: ['Alte Haas Grotesk', ...defaultTheme.fontFamily.sans]
+      }
+    },
+    colors: {
+      'light-yellow': '#f5f1bf',
+      'brick-orange': '#d24a19',
+      'dark-red': '#8a181a'
+    }
   },
   plugins: []
 }
