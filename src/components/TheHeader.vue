@@ -1,5 +1,9 @@
 <template>
-  <header>
-    <h1 class="text-5xl tracking-[0.5rem] text-brick-orange font-display lowercase mb-10">Binnenvisser</h1>
+  <header ref="header">
+    <h1
+      class="font-display text-[10.5vw] lowercase leading-none tracking-[0.3em] text-brick-orange"
+    >
+      Binnenvisser
+    </h1>
   </header>
 </template>

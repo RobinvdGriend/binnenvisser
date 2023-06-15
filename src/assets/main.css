@@ -2,20 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .rich-text h1 {
+    @apply font-bold
+  }
+
+  .rich-text p {
+    @apply mb-3;
+  }
+
+  .rich-text ul {
+    @apply mb-3 list-disc list-inside;
+  }
+
+  .rich-text a {
+    @apply font-bold
+  }
+}
+
 @font-face {
-  font-family: "Univers";
+  font-family: 'Univers';
   src: url(@/assets/fonts/UniversBold.woff2);
   font-weight: 650;
 }
 
 @font-face {
-  font-family: "Univers";
+  font-family: 'Univers';
   src: url(@/assets/fonts/UniversRoman.woff2);
   font-weight: 550;
 }
 
 @font-face {
-  font-family: "Alte Haas Grotesk";
+  font-family: 'Alte Haas Grotesk';
   src: url(@/assets/fonts/AlteHaasGroteskRegular.woff2);
   font-weight: normal;
 }

@@ -3,12 +3,14 @@ import MenuItem from './MenuItem.vue'
 </script>
 
 <template>
-  <nav class="flex flex-col items-end text-4xl leading-tight">
+  <nav
+    class="flex flex-col items-end text-4xl leading-tight md:items-start md:text-base md:leading-4"
+  >
     <MenuItem to="/">home</MenuItem>
-    <MenuItem to="/">info</MenuItem>
+    <MenuItem to="/info">info</MenuItem>
     <MenuItem to="/">group reservations</MenuItem>
     <MenuItem to="/">menu</MenuItem>
-    <MenuItem to="/">jobs</MenuItem>
-    <MenuItem to="/">gallery</MenuItem>
+    <MenuItem to="/jobs">jobs</MenuItem>
+    <MenuItem to="/gallery">gallery</MenuItem>
   </nav>
 </template>

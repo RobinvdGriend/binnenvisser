@@ -4,5 +4,5 @@ import type { RouteLocationRaw } from 'vue-router'
 const props = defineProps<{ to: RouteLocationRaw }>()
 </script>
 <template>
-  <RouterLink :to="props.to"><slot /></RouterLink>
+  <RouterLink class="text-dark-red" :to="props.to"><slot /></RouterLink>
 </template>
