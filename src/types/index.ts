@@ -38,7 +38,15 @@ export type MenuItem = {
   sort: number
   name: string
   price: string
-  category: string | null
+  category: MenuCategory
+}
+
+export type MenuCategory = {
+  id: string
+  sort: string
+  name: string
+  hide_category_name: boolean
+  menu_items: MenuItem[]
 }
 
 export type WineMaker = {

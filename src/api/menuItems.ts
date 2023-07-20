@@ -1,14 +1,16 @@
 import { directus } from "@/lib/directus";
 import { useSwrv } from "@/lib/swrv";
-import type { MenuItem } from "@/types";
+import type { MenuCategory } from "@/types";
 
-export async function getMenuItems(): Promise<MenuItem[]> {
-  return directus.items('menu_items').readByQuery({
+export async function getMenuCategories(): Promise<MenuCategory[]> {
+  return directus.items('menu_category').readByQuery({
     limit: -1,
-    sort: ['sort'],
-  }).then(r => r.data ?? [])
+    // @ts-ignore
+    sort: ['menu_items.sort', 'sort'],
+    fields: ['*', 'menu_items.*']
+  }).then(r => (r.data as MenuCategory[] | null | undefined) ?? [])
 }
 
-export function useMenuItems() {
-  return useSwrv<MenuItem[]>('/menu_items', getMenuItems)
+export function useMenuCategories() {
+  return useSwrv<MenuCategory[]>('/menu_categories', getMenuCategories)
 }
