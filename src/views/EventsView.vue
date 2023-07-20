@@ -25,7 +25,7 @@ const pastEvents = computed(
 </script>
 
 <template>
-  <main class="text-center">
+  <main class="text-center lg:text-left">
     <section class="mb-4">
       <h1 class="mb-4">upcoming events:</h1>
       <EventsItem v-for="event in upcomingEvents" :event="event" :key="event.id"/>

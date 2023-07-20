@@ -61,6 +61,6 @@ export type InstagramFeedItem = {
   dominantColor: string
 }
 
-export type ContactInformation = {
+export type Info = {
   content: string
 }

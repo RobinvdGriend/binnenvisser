@@ -13,7 +13,7 @@ getInstagramFeed().then((result) => {
 </script>
 
 <template>
-  <main class="col-span-2 grid grid-cols-2 gap-2 md:grid-cols-3 lg:col-span-3">
+  <main class="grid h-min grid-cols-2 gap-2 md:grid-cols-3">
     <article v-for="item in feed" :key="item.id">
       <BaseImage class="aspect-square w-full object-cover" :src="item.mediaUrl" />
     </article>

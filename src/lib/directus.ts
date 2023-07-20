@@ -1,6 +1,6 @@
 import { Directus } from '@directus/sdk'
 import { CMS_URL } from '@/config'
-import type { Home, FlatPage, Event, Grape, WineMaker, ContactInformation, MenuItem, MenuCategory } from '@/types'
+import type { Home, FlatPage, Event, Grape, WineMaker, Info, MenuItem, MenuCategory } from '@/types'
 
 type Collections = {
   home: Home
@@ -8,7 +8,7 @@ type Collections = {
   events: Event
   wine_makers: WineMaker
   grapes: Grape
-  contact_information: ContactInformation
+  info: Info
   menu_items: MenuItem
   menu_category: MenuCategory
 }

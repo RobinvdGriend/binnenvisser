@@ -29,6 +29,10 @@
     @apply mb-3;
   }
 
+  .rich-text p:last-child {
+    @apply mb-0;
+  }
+
   .rich-text ul {
     @apply mb-3 list-disc list-inside;
   }

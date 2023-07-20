@@ -7,7 +7,7 @@ import MenuItem from './MenuItem.vue'
     class="flex flex-col items-end text-4xl leading-tight md:items-start md:text-base md:leading-4"
   >
     <MenuItem to="/">home</MenuItem>
-    <MenuItem to="/info">info</MenuItem>
+    <MenuItem class="lg:hidden" to="/info">info</MenuItem>
     <MenuItem to="/group-reservations">group reservations</MenuItem>
     <MenuItem to="/menu">menu</MenuItem>
     <MenuItem to="/wines">wines</MenuItem>
