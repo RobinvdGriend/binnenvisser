@@ -34,7 +34,7 @@ const pastEvents = computed(
     </section>
     <section>
       <h1 class="mb-4">past events:</h1>
-      <div class="grid grid-cols-2 gap-1">
+      <div class="grid grid-cols-2 gap-3">
         <EventsItem
           v-for="event in pastEvents"
           :event="event"

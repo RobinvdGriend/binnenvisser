@@ -15,7 +15,7 @@ const { data: menuCategories } = useMenuCategories()
 </script>
 
 <template>
-  <main>
+  <main class="lg:w-9/12">
     <template v-for="menuCategory in menuCategories" :key="menuCategory.id">
       <h1 v-if="!menuCategory.hide_category_name" class="uppercase">{{ menuCategory.name }}</h1>
       <table class="mb-8 w-full border-collapse">
