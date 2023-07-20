@@ -13,7 +13,8 @@ export default {
     colors: {
       'light-yellow': '#f5f1bf',
       'brick-orange': '#d24a19',
-      'dark-red': '#8a181a'
+      'dark-red': '#8a181a',
+      'dark-green': '#7a5510',
     }
   },
   plugins: []

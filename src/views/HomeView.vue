@@ -1,13 +1,12 @@
 <script setup lang="ts">
-import { useHome } from '@/api/getHome';
+import { useHome } from '@/api/getHome'
 
-const { data } = useHome();
+const { data } = useHome()
 </script>
 
 <template>
-  <main>
-    <section v-if="data" v-html="data.content">
-    </section>
+  <main class="lg:contents">
+    <section class="rich-text" v-if="data" v-html="data.content"></section>
     <section class="text-center">
       <p>upcoming events:</p>
       <article class="mt-4">

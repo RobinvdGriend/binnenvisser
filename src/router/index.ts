@@ -1,4 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
+
+import GalleryView from '@/views/GalleryView.vue'
 import HomeView from '@/views/HomeView.vue'
 import FlatPageView from '@/views/FlatPageView.vue'
 
@@ -9,6 +11,12 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView
+    },
+    {
+      path: '/gallery',
+      name: 'gallery',
+      component: GalleryView,
+      meta: { hideLogo: true },
     },
     {
       path: '/:slug',

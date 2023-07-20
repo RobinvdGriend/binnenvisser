@@ -8,8 +8,9 @@ import MenuItem from './MenuItem.vue'
   >
     <MenuItem to="/">home</MenuItem>
     <MenuItem to="/info">info</MenuItem>
-    <MenuItem to="/">group reservations</MenuItem>
-    <MenuItem to="/">menu</MenuItem>
+    <MenuItem to="/group-reservations">group reservations</MenuItem>
+    <MenuItem to="/menu">menu</MenuItem>
+    <MenuItem to="/wines">wines</MenuItem>
     <MenuItem to="/jobs">jobs</MenuItem>
     <MenuItem to="/gallery">gallery</MenuItem>
   </nav>
