@@ -1,22 +1,18 @@
 <script setup lang="ts">
 import { useHome } from '@/api/home'
+import { useEvents } from '@/api/events'
+import EventsItem from '@/components/EventsItem.vue'
 
 const { data } = useHome()
+const { data: events } = useEvents({ onlyIncludeUpcomingEvents: true })
 </script>
 
 <template>
   <main class="lg:contents">
-    <section class="rich-text" v-if="data" v-html="data.content"></section>
-    <section class="text-center">
-      <p>upcoming events:</p>
-      <article class="mt-4">
-        <p class="font-bold">sun. 26–mon. 27 march, 10:00 - 18:00</p>
-        <p>the dusty knuckle bakery, london, popup at binnenvisser and loof</p>
-      </article>
-      <article class="mt-4">
-        <p class="font-bold">sun. 26–mon. 27 march, 10:00 - 18:00</p>
-        <p>the dusty knuckle bakery, london, popup at binnenvisser and loof</p>
-      </article>
+    <section class="rich-text mb-4" v-if="data" v-html="data.content"></section>
+    <section class="text-center" v-if="events && events.length > 0">
+      <RouterLink to="/events"><p class="mb-4">upcoming events:</p></RouterLink>
+      <EventsItem v-for="event in events" :event="event" :key="event.id" :display-image="false" />
     </section>
   </main>
 </template>

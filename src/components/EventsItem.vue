@@ -4,9 +4,13 @@ import { zonedTimeToUtc, utcToZonedTime, format } from 'date-fns-tz'
 import type { Event } from '@/types'
 import DirectusImage from '@/components/DirectusImage.vue'
 
-const props = withDefaults(defineProps<{ event: Event; displayTime: boolean }>(), {
-  displayTime: true
-})
+const props = withDefaults(
+  defineProps<{ event: Event; displayTime?: boolean; displayImage?: boolean }>(),
+  {
+    displayTime: true,
+    displayImage: true
+  }
+)
 
 function renderDate(dateString: string) {
   const date = zonedTimeToUtc(dateString, 'Europe/Amsterdam')
@@ -40,7 +44,7 @@ function renderSchedule(event: Event) {
 <template>
   <article>
     <DirectusImage v-if="props.event.image" :image="props.event.image" />
-    <p class="font-bold">{{ renderSchedule(props.event) }}</p>
+    <p class="font-bold lowercase">{{ renderSchedule(props.event) }}</p>
     <h1>{{ props.event.name }}</h1>
   </article>
 </template>

@@ -24,13 +24,14 @@ useRouter().beforeEach(() => {
 <template>
   <div
     :style="{ 'margin-bottom': overlayHeight + 'px' }"
-    class="mx-4 grid-cols-[1fr_3fr] gap-x-4 lowercase leading-tight text-dark-green lg:grid lg:grid-cols-4"
+    class="mx-4 grid-cols-[1fr_3fr] gap-x-4 leading-tight text-dark-green lg:grid lg:grid-cols-4"
   >
     <MenuButton class="ml-auto mt-2 w-10" @click="toggleMobileMenu()" :show-cross="mobileMenuShown"/>
     <TheHeader class="col-span-full md:mb-3" />
     <TheMenu v-show="mobileMenuShown || !mobileMenuBreakpoint" class="mt-3 flex"/>
     <RouterView class="mt-10" v-show="!mobileMenuShown" />
   </div>
+
   <div ref="overlay" class="fixed bottom-0 flex w-full flex-auto items-end p-4">
     <RouterLink to="/" class="block h-32">
       <img

@@ -31,6 +31,7 @@ export type Event = {
 export type Grape = {
   id: string
   name: string
+  country: string
 }
 
 export type MenuItem = {
@@ -52,7 +53,6 @@ export type MenuCategory = {
 export type WineMaker = {
   id: string
   name: string
-  country: string
 }
 
 export type InstagramFeedItem = {
