@@ -33,7 +33,7 @@ useRouter().beforeEach((to) => {
 <template>
   <div
     :style="{ 'margin-bottom': overlayHeight + 'px' }"
-    class="mx-4 grid-cols-[1fr_3fr] grid-rows-[min-content_1fr] gap-x-4 leading-tight text-dark-green lg:mx-6 lg:grid lg:h-screen lg:grid-cols-4"
+    class="mx-4 grid-cols-[1fr_3fr] grid-rows-[min-content_1fr] gap-x-4 leading-tight text-dark-green lg:mx-4 lg:grid lg:h-screen lg:grid-cols-4"
   >
     <MenuButton
       class="ml-auto mt-2 w-10 lg:hidden"
@@ -44,7 +44,7 @@ useRouter().beforeEach((to) => {
     <TheMenu v-show="mobileMenuShown || lgBreakpoint" class="mt-3 flex lg:mt-0" />
     <RouterView class="col-span-2 mb-4 mt-10 lg:mt-0" v-show="!mobileMenuShown || lgBreakpoint" />
     <div class="relative hidden lg:block">
-      <div class="absolute bottom-0 mb-20 flex items-end">
+      <div class="absolute bottom-0 mb-20 flex items-end justify-end">
         <TheInfo />
         <TheLogo class="ml-3 h-48" />
       </div>
