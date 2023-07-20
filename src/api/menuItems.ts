@@ -1,4 +1,5 @@
 import { directus } from "@/lib/directus";
+import { useSwrv } from "@/lib/swrv";
 import type { MenuItem } from "@/types";
 
 export async function getMenuItems(): Promise<MenuItem[]> {
@@ -6,4 +7,8 @@ export async function getMenuItems(): Promise<MenuItem[]> {
     limit: -1,
     sort: ['sort'],
   }).then(r => r.data ?? [])
+}
+
+export function useMenuItems() {
+  return useSwrv<MenuItem[]>('/menu_items', getMenuItems)
 }

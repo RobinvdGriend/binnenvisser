@@ -1,5 +1,4 @@
-import useSWRV from 'swrv'
-
+import { useSwrv } from '@/lib/swrv'
 import type { Home } from '@/types'
 import { directus } from '@/lib/directus'
 
@@ -13,5 +12,5 @@ export async function getHome(): Promise<Home> {
 }
 
 export function useHome() {
-  return useSWRV('home', getHome)
+  return useSwrv<Home>('home', getHome)
 }

@@ -2,7 +2,7 @@
 import type { Ref } from 'vue'
 import { useRouteParams } from '@vueuse/router'
 
-import { useFlatPage } from '@/api/getFlatPage';
+import { useFlatPage } from '@/api/flatPages';
 
 
 const slug = useRouteParams('slug');

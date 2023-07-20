@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useHome } from '@/api/getHome'
+import { useHome } from '@/api/home'
 
 const { data } = useHome()
 </script>

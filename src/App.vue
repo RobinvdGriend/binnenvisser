@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed} from 'vue'
+import { ref } from 'vue'
 import { useElementSize } from '@vueuse/core'
 import { RouterView, useRouter } from 'vue-router'
 import { breakpointsTailwind, useBreakpoints, useToggle } from '@vueuse/core'

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { InstagramFeedItem } from '@/types'
-import { getInstagramFeed } from '@/api/getInstagramFeed'
+import { getInstagramFeed } from '@/api/instagramFeed'
 import { ref } from 'vue'
 
 const feed = ref<InstagramFeedItem[]>([])
