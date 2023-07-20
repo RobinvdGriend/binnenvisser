@@ -4,6 +4,7 @@ import GalleryView from '@/views/GalleryView.vue'
 import HomeView from '@/views/HomeView.vue'
 import FlatPageView from '@/views/FlatPageView.vue'
 import EventsView from '@/views/EventsView.vue'
+import MenuView from '@/views/MenuView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -23,6 +24,11 @@ const router = createRouter({
       path: '/events',
       name: 'events',
       component: EventsView,
+    },
+    {
+      path: '/menu',
+      name: 'menu',
+      component: MenuView,
     },
     {
       path: '/:slug',

@@ -14,8 +14,8 @@ export type Home = {
 
 export type Image = {
   id: string,
-  title: string
-  description: string
+  title?: string
+  description?: string
 }
 
 export type Event = {
