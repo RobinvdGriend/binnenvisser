@@ -38,6 +38,10 @@ services:
 
       CORS_ENABLED: 'true'
       CORS_ORIGIN: 'true'
+      
+      CACHE_ENABLED: 'true'
+      CACHE_STORE: 'redis'
+      REDIS: 'redis://cache:6379'
 
       ROOT_REDIRECT: '/cms'
       # Make sure to set this in production
