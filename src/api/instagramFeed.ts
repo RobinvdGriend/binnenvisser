@@ -9,5 +9,6 @@ export async function getInstagramFeed(): Promise<InstagramFeedItem[]> {
     id: item.id,
     mediaUrl: item.mediaUrl,
     dominantColor: item.colorPalette.dominant,
+    permalink: item.permalink,
   }))
 }
