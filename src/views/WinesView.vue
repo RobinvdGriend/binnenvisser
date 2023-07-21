@@ -13,7 +13,7 @@ const countries = computed(() => uniq(map(grapes.value, (grape) => grape.country
 </script>
 
 <template>
-  <main class="grid grid-cols-2">
+  <main class="grid grid-cols-2 gap-4">
     <section>
       <h1 class="mb-4">makers:</h1>
       <p v-for="maker in wineMakers" :key="maker.id">{{ maker.name }}</p>

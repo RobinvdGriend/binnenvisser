@@ -4,7 +4,7 @@ import MenuItem from './MenuItem.vue'
 
 <template>
   <nav
-    class="flex flex-col items-end text-4xl leading-tight md:items-start md:text-base md:leading-4"
+    class="flex flex-col items-end text-4xl leading-tight lg:items-start lg:text-base lg:leading-4"
   >
     <MenuItem to="/">home</MenuItem>
     <MenuItem class="lg:hidden" to="/info">info</MenuItem>

@@ -4,7 +4,7 @@
 
 @layer base {
   html {
-    @apply bg-light-yellow bg-opacity-10;
+    @apply bg-light-yellow bg-opacity-10 tracking-[0.03rem];
   }
 }
 
