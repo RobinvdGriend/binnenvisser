@@ -42,7 +42,7 @@ function renderSchedule(event: Event) {
 </script>
 
 <template>
-  <article>
+  <article class="text-center">
     <DirectusImage class="mb-3" v-if="props.event.image" :image="props.event.image" />
     <p class="font-bold lowercase">{{ renderSchedule(props.event) }}</p>
     <h1>{{ props.event.name }}</h1>

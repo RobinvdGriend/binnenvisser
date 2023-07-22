@@ -25,7 +25,7 @@ const pastEvents = computed(
 </script>
 
 <template>
-  <main class="text-center">
+  <main>
     <section class="mb-4">
       <h1 class="mb-4">upcoming events:</h1>
       <div class="grid grid-cols-2">

@@ -33,7 +33,7 @@ useRouter().beforeEach((to) => {
 <template>
   <div
     :style="{ 'margin-bottom': overlayHeight + 'px' }"
-    class="mx-4 grid-cols-[1fr_3fr] grid-rows-[min-content_1fr] gap-x-4 leading-tight text-dark-green lg:m-6 lg:grid lg:grid-cols-4"
+    class="grid-cols-[1fr_3fr] grid-rows-[min-content_1fr] gap-x-4 px-4 leading-tight text-dark-green lg:grid lg:max-h-screen lg:grid-cols-4 lg:p-6 lg:pb-0"
   >
     <MenuButton
       class="ml-auto mt-2 w-10 lg:hidden"
@@ -41,8 +41,11 @@ useRouter().beforeEach((to) => {
       :show-cross="mobileMenuShown"
     />
     <TheHeader class="col-span-full lg:mb-6" />
-    <TheMenu v-show="mobileMenuShown || lgBreakpoint" class="mt-3 flex lg:mt-0" />
-    <RouterView class="col-span-2 mb-4 mt-10 lg:mt-0" v-show="!mobileMenuShown || lgBreakpoint" />
+    <TheMenu v-show="mobileMenuShown || lgBreakpoint" class="mt-10 flex lg:mt-0" />
+    <RouterView
+      class="col-span-2 mb-4 mt-10 lg:my-0 lg:overflow-y-auto"
+      v-show="!mobileMenuShown || lgBreakpoint"
+    />
     <div class="fixed bottom-0 right-0 mb-20 hidden w-1/4 items-end justify-end pr-6 lg:flex">
       <TheInfo />
       <RouterLink class="shrink-0" to="/">
