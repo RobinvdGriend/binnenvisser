@@ -43,7 +43,7 @@ useRouter().beforeEach((to) => {
     <TheHeader class="col-span-full lg:mb-6" />
     <TheMenu v-show="mobileMenuShown || lgBreakpoint" class="mt-10 flex lg:mt-0" />
     <RouterView
-      class="lg:scroll-stable col-span-2 mb-4 mt-10 lg:my-0 lg:overflow-y-auto"
+      class="lg:scroll-stable col-span-2 mb-4 mt-10 lg:my-0 lg:overflow-y-auto lg:pb-4"
       v-show="!mobileMenuShown || lgBreakpoint"
     />
     <RouterLink to="/" v-show="!mobileMenuShown" class="lg:hidden">
