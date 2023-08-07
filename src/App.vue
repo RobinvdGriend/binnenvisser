@@ -39,7 +39,7 @@ useRouter().beforeEach((to) => {
     class="grid-cols-[1fr_3fr] grid-rows-[min-content_1fr] gap-x-4 p-4 pt-2 leading-tight text-dark-green lg:grid lg:max-h-screen lg:grid-cols-4 lg:p-6 lg:pb-0"
   >
     <MenuButton
-      class="ml-auto w-10 lg:hidden"
+      class="ml-auto w-8 lg:hidden"
       @click="toggleMobileMenu()"
       :show-cross="mobileMenuShown"
     />
