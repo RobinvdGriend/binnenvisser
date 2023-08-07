@@ -8,6 +8,10 @@ import MenuView from '@/views/MenuView.vue'
 import WinesView from '@/views/WinesView.vue'
 import InfoView from '@/views/InfoView.vue'
 
+import { useFormitable } from '@/composables/formitable'
+
+const { widgetShown } = useFormitable()
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -20,33 +24,41 @@ const router = createRouter({
       path: '/gallery',
       name: 'gallery',
       component: GalleryView,
-      meta: { hideLogo: true },
+      meta: { hideLogo: true }
     },
     {
       path: '/events',
       name: 'events',
-      component: EventsView,
+      component: EventsView
     },
     {
       path: '/menu',
       name: 'menu',
-      component: MenuView,
+      component: MenuView
     },
     {
       path: '/wines',
       name: 'wines',
-      component: WinesView,
+      component: WinesView
     },
     {
       path: '/info',
       name: 'info',
-      component: InfoView,
+      component: InfoView
     },
     {
       path: '/:slug',
-      component: FlatPageView,
+      component: FlatPageView
     }
   ]
+})
+
+router.beforeEach((to) => {
+  if (to.path == '/group-reservations') {
+    widgetShown.value = true
+  } else {
+    widgetShown.value = false
+  }
 })
 
 export default router
