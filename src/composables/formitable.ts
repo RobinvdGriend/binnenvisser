@@ -4,11 +4,11 @@ const widgetShown = ref(false)
 
 export function useFormitable() {
   function showWidget() {
-    (FT.widgets.get().element as HTMLElement).style = ''
+    (FT.widgets.get().element as HTMLElement).style.cssText = ''
   }
 
   function hideWidget() {
-    (FT.widgets.get().element as HTMLElement).style = 'display: none !important;'
+    (FT.widgets.get().element as HTMLElement).style.cssText = 'display: none !important;'
   }
 
   watchEffect(() => {
