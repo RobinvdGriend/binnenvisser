@@ -13,7 +13,7 @@ services:
       - directus
 
   cms:
-    image: directus/directus:latest
+    image: directus/directus:10.5
     ports:
       - 8010:8055
     volumes:
