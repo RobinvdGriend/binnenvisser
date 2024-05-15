@@ -55,7 +55,7 @@ const router = createRouter({
 
 router.beforeEach((to) => {
   console.log(to.path)
-  if (['/group-reservations', '/events'].includes(to.path)) {
+  if (['/reservations', '/', '/events'].includes(to.path)) {
     widgetShown.value = true
   } else {
     widgetShown.value = false
