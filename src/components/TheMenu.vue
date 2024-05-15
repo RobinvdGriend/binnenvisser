@@ -8,7 +8,7 @@ import MenuItem from './MenuItem.vue'
   >
     <MenuItem to="/">home</MenuItem>
     <MenuItem class="lg:hidden" to="/info">info</MenuItem>
-    <MenuItem to="/group-reservations">group reservations</MenuItem>
+    <MenuItem to="/reservations">reservations</MenuItem>
     <MenuItem to="/menu">menu</MenuItem>
     <MenuItem to="/wines">wines</MenuItem>
     <MenuItem to="/jobs">jobs</MenuItem>
