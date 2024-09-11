@@ -13,6 +13,8 @@ import MenuItem from './MenuItem.vue'
     <MenuItem to="/wines">wines</MenuItem>
     <MenuItem to="/jobs">jobs</MenuItem>
     <MenuItem to="/events">events</MenuItem>
+    <MenuItem to="/private-hire">private hire</MenuItem>
     <MenuItem to="/gallery">gallery</MenuItem>
+    <MenuItem to="/family">family</MenuItem>
   </nav>
 </template>
