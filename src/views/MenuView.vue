@@ -16,7 +16,7 @@ const { data: menuCategories } = useMenuCategories()
 
 <template>
   <main>
-    <p class="mb-6">this is a sample menu—our menu is subject to daily change</p>
+    <p class="mb-6">our menu changes seasonal and therefor subject to daily alterations</p>
     <div class="lg:w-9/12">
       <template v-for="menuCategory in menuCategories" :key="menuCategory.id">
         <h1 v-if="!menuCategory.hide_category_name" class="uppercase">{{ menuCategory.name }}</h1>
