@@ -65,3 +65,18 @@ export type InstagramFeedItem = {
 export type Info = {
   content: string
 }
+
+export type Bottle = {
+  id: string
+  name: string
+  year?: string
+  info?: string
+  maker: string
+  location: string
+  category: BottleCategory
+}
+
+export type BottleCategory = {
+  id: string
+  name: string
+}
