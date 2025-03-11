@@ -10,7 +10,9 @@ const { data: rawBottles } = useBottles()
 const userSelectedListId = ref<string | null>(null)
 
 // We want to default to the first list if the user hasn't selected one
-const selectedListId = computed(() => userSelectedListId.value ? userSelectedListId.value : bottleLists.value?.[0].id)
+const selectedListId = computed(() =>
+  userSelectedListId.value ? userSelectedListId.value : bottleLists.value?.[0].id
+)
 
 const bottles = computed(() => {
   if (!bottleLists.value) {
@@ -59,9 +61,15 @@ const bottles = computed(() => {
     </div>
     <div class="">
       <div class="mb-5 grid grid-cols-2 gap-2">
-        <button @click="userSelectedListId = bottleList.id" v-for="bottleList in bottleLists" :class="{
-          'opacity-50': selectedListId !== bottleList.id
-        }" class="border-b border-dark-green pb-1" :key="bottleList.id">
+        <button
+          @click="userSelectedListId = bottleList.id"
+          v-for="bottleList in bottleLists"
+          :class="{
+            'opacity-50': selectedListId !== bottleList.id
+          }"
+          class="border-b border-dark-green pb-1"
+          :key="bottleList.id"
+        >
           <h1>{{ bottleList.name }}</h1>
           <p class="text-balance text-xs">
             {{ bottleList.description }}
@@ -69,9 +77,7 @@ const bottles = computed(() => {
         </button>
       </div>
       <section class="mb-5" v-for="category in Object.keys(bottles)" :key="category">
-        <h1
-          class="mb-1 gap-2 border-b-dark-green font-bold uppercase text-lg"
-        >
+        <h1 class="mb-1 gap-2 border-b-dark-green text-lg font-bold uppercase">
           {{ category }}
         </h1>
         <section v-for="location in Object.keys(bottles[category])" :key="location">
@@ -87,11 +93,14 @@ const bottles = computed(() => {
               v-for="bottle in bottles[category][location][maker]"
               :key="bottle.id"
             >
-              <p>
-                <span class="">{{ bottle.name }}{{ bottle.year ? ` ${bottle.year}` : '' }}</span>
+              <p class="flex">
+                <span class="shrink-0">
+                  {{ bottle.name }}{{ bottle.year ? ` ${bottle.year}` : '' }}
+                </span>
+                <span class="whitespace-pre opacity-75"> — </span>
                 <span class="opacity-75">
-                  — {{ bottle.info }}{{ bottle.location ? `, ${bottle.location}` : '' }}</span
-                >
+                  {{ bottle.info }}{{ bottle.location ? `, ${bottle.location}` : '' }}
+                </span>
               </p>
             </section>
           </section>
