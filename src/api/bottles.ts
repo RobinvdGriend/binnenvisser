@@ -3,6 +3,7 @@ import { directus } from '@/lib/directus'
 import type { Bottle, BottleList} from '@/types'
 
 export async function getBottles(): Promise<Bottle[]> {
+  // @ts-expect-error
   return directus
     .items('bottles')
     .readByQuery({ limit: -1, sort: ['category', 'location','maker'], fields: ['*', 'category.*']})

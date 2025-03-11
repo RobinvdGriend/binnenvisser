@@ -70,7 +70,7 @@ const bottles = computed(() => {
       </div>
       <section class="mb-5" v-for="category in Object.keys(bottles)" :key="category">
         <h1
-          class="mb-1 flex items-center gap-2 border-b-dark-green font-bold uppercase before:flex-1 before:border-b after:flex-1 after:border-b"
+          class="mb-1 gap-2 border-b-dark-green font-bold uppercase text-lg"
         >
           {{ category }}
         </h1>
