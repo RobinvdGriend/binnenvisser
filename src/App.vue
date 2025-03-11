@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onBeforeUnmount, onMounted, ref } from 'vue'
 import { breakpointsTailwind, useBreakpoints, useElementSize } from '@vueuse/core'
 import { RouterView, useRouter } from 'vue-router'
 import { useToggle } from '@vueuse/core'
@@ -10,6 +10,7 @@ import TheInfo from './components/TheInfo.vue'
 import TheLogo from './components/TheLogo.vue'
 import MenuButton from './components/MenuButton.vue'
 import { useFormitable } from '@/composables/formitable'
+import { on } from 'events'
 
 const { widgetShown } = useFormitable()
 
@@ -21,6 +22,15 @@ const [mobileMenuShown, toggleMobileMenu] = useToggle(false)
 
 const overlay = ref<HTMLElement | null>(null)
 const overlayHeight = useElementSize(overlay, undefined, { box: 'border-box' }).height
+
+const trackFormitableInUmami = (e) => {
+  // @ts-ignore
+  umami.trackEvent('formitable-widget-ordered', e.detail)
+}
+
+// Register Formitabe events to Umami and cleanup after unmount
+onMounted(() => window.addEventListener('ft-widget-ordered', trackFormitableInUmami))
+onBeforeUnmount(() => window.removeEventListener('ft-widget-ordered', trackFormitableInUmami))
 
 useRouter().beforeEach((to) => {
   if (to.meta.hideLogo) {
