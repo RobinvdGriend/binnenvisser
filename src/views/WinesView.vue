@@ -1,37 +1,93 @@
 <script setup lang="ts">
-import { groupBy, map, uniq } from 'lodash-es'
+import { groupBy, mapValues, filter } from 'lodash-es'
 
-import { useWineMakers } from '@/api/wineMakers'
-import { useGrapes } from '@/api/grapes'
-import { computed } from 'vue'
+import { useBottles, useBottleLists } from '@/api/bottles'
+import { computed, ref } from 'vue'
+import { useWinePageDescription } from '@/api/winePage'
 
-const { data: wineMakers } = useWineMakers()
-const { data: grapes } = useGrapes()
+const { data: bottleLists } = useBottleLists()
+const { data: rawBottles } = useBottles()
+const { data: winePageData } = useWinePageDescription()
 
-const grapesByCountry = computed(() => groupBy(grapes.value, (grape) => grape.country))
-const countries = computed(() => uniq(map(grapes.value, (grape) => grape.country)).sort())
+const userSelectedListId = ref<string | null>(null)
+
+// We want to default to the first list if the user hasn't selected one
+const selectedListId = computed(() =>
+  userSelectedListId.value ? userSelectedListId.value : bottleLists.value?.[0].id
+)
+
+const bottles = computed(() => {
+  if (!bottleLists.value) {
+    return {}
+  }
+
+  const categoryGroup = groupBy(
+    filter(rawBottles.value, (bottle) => bottle.list == selectedListId.value),
+    (bottle) => bottle.category.name
+  )
+
+  const locationGroup = mapValues(categoryGroup, (group) =>
+    groupBy(group, (bottle) => bottle.location)
+  )
+
+  const makerGroup = mapValues(locationGroup, (category) =>
+    mapValues(category, (location) => groupBy(location, 'maker'))
+  )
+
+  return makerGroup
+})
 </script>
 
 <template>
   <main>
-    <p class="mb-6">
-      we choose to work with artisan winemakers who farm without using any chemicals in the vines,
-      and in this way trying to minimize the manipulation of the grapes in the cellar<br />
-      <br />
-      these produced wines reflect the vineyards' climate, soil and terrain
-    </p>
-    <div class="grid grid-cols-2 gap-4">
-      <section>
-        <h1 class="mb-4">makers:</h1>
-        <p v-for="maker in wineMakers" :key="maker.id">{{ maker.name }}</p>
-      </section>
-      <section>
-        <h1 class="mb-4">grapes:</h1>
-        <section class="mb-4" v-for="country in countries" :key="country">
-          <h2 class="uppercase">{{ country }}</h2>
-          <p v-for="grape in grapesByCountry[country]" :key="grape.id">{{ grape.name }}</p>
+    <section class="rich-text" v-if="winePageData" v-html="winePageData.description"></section>
+    <div class="">
+      <div class="mb-5 grid grid-cols-2 gap-2">
+        <button
+          @click="userSelectedListId = bottleList.id"
+          v-for="bottleList in bottleLists"
+          :class="{
+            'opacity-50': selectedListId !== bottleList.id
+          }"
+          class="border-b border-dark-green pb-1"
+          :key="bottleList.id"
+        >
+          <h1>{{ bottleList.name }}</h1>
+          <p class="text-balance text-xs">
+            {{ bottleList.description }}
+          </p>
+        </button>
+      </div>
+      <section class="mb-5" v-for="category in Object.keys(bottles)" :key="category">
+        <h1 class="mb-1 gap-2 border-b-dark-green text-lg font-bold uppercase">
+          {{ category }}
+        </h1>
+        <section v-for="location in Object.keys(bottles[category])" :key="location">
+          <h2 class="font-bold">{{ location }}</h2>
+          <section
+            class="mb-3"
+            v-for="maker in Object.keys(bottles[category][location])"
+            :key="maker"
+          >
+            <h3 class="italic">{{ maker }}</h3>
+            <section
+              class="ml-3"
+              v-for="bottle in bottles[category][location][maker]"
+              :key="bottle.id"
+            >
+              <p class="ml:3 -indent-3">
+                <span class=""> {{ bottle.name }}{{ bottle.year ? ` ${bottle.year}` : '' }} </span>
+                <span class="whitespace-pre opacity-75"> — </span>
+                <span class="opacity-75">
+                  {{ bottle.info }}
+                </span>
+              </p>
+            </section>
+          </section>
         </section>
       </section>
     </div>
   </main>
 </template>
+
+<style lang="css" scoped></style>
