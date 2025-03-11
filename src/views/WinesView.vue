@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import { groupBy, map, mapValues, uniq, filter } from 'lodash-es'
+import { groupBy, mapValues, filter } from 'lodash-es'
 
 import { useBottles, useBottleLists } from '@/api/bottles'
 import { computed, ref } from 'vue'
+import { useWinePageDescription } from '@/api/winePage'
 
 const { data: bottleLists } = useBottleLists()
 const { data: rawBottles } = useBottles()
+const { data: winePageData } = useWinePageDescription()
 
 const userSelectedListId = ref<string | null>(null)
 
@@ -38,27 +40,7 @@ const bottles = computed(() => {
 
 <template>
   <main>
-    <div class="mb-6">
-      <p class="mb-3">
-        since our opening in 2017 we have been passionate about showcasing the work of
-        low-intervention winemakers.
-      </p>
-
-      <p class="mb-3">
-        our carefully curated selection highlights small producers with a focus on sustainability in
-        their farming and low-or-no intervention in their cellars.
-      </p>
-
-      <p class="mb-3">
-        as these wines sometimes need time to be at their very best, we also age some of our cuvées
-        for a few years in our climate controlled storage before releasing onto our lists at the
-        restaurant— this way we hope to showcase great wines at their very best.
-      </p>
-
-      <p class="mb-3">
-        we invite you to explore our selection and discover the wines we have loved since day one.
-      </p>
-    </div>
+    <section class="rich-text" v-if="winePageData" v-html="winePageData.description"></section>
     <div class="">
       <div class="mb-5 grid grid-cols-2 gap-2">
         <button
