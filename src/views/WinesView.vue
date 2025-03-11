@@ -75,13 +75,11 @@ const bottles = computed(() => {
               v-for="bottle in bottles[category][location][maker]"
               :key="bottle.id"
             >
-              <p class="flex">
-                <span class="shrink-0">
-                  {{ bottle.name }}{{ bottle.year ? ` ${bottle.year}` : '' }}
-                </span>
+              <p class="ml:3 -indent-3">
+                <span class=""> {{ bottle.name }}{{ bottle.year ? ` ${bottle.year}` : '' }} </span>
                 <span class="whitespace-pre opacity-75"> — </span>
                 <span class="opacity-75">
-                  {{ bottle.info }}{{ bottle.location ? `, ${bottle.location}` : '' }}
+                  {{ bottle.info }}
                 </span>
               </p>
             </section>
