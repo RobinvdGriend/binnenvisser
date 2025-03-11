@@ -18,6 +18,10 @@
   .scroll-stable {
     scrollbar-gutter: stable;
   }
+
+  .text-balance {
+    text-wrap: balance
+  }
 }
 
 @layer components {

@@ -10,7 +10,8 @@ import type {
   MenuItem,
   MenuCategory,
   Bottle,
-  BottleCategory
+  BottleCategory,
+  BottleList
 } from '@/types'
 
 type Collections = {
@@ -23,7 +24,8 @@ type Collections = {
   menu_items: MenuItem
   menu_category: MenuCategory
   bottles: Bottle
-  bottle_categories: BottleCategory
+  bottle_categories: BottleCategory,
+  bottle_lists: BottleList
 }
 
 export const directus = new Directus<Collections>(CMS_URL)

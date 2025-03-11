@@ -1,3 +1,5 @@
+import type { ID } from "@directus/sdk"
+
 export type FlatPageSummary = {
   id: string
   name: string
@@ -66,6 +68,18 @@ export type Info = {
   content: string
 }
 
+export type BottleCategory = {
+  id: string
+  name: string
+}
+
+export type BottleList = {
+  id: string
+  name: string
+  description: string
+  order: number
+}
+
 export type Bottle = {
   id: string
   name: string
@@ -74,9 +88,5 @@ export type Bottle = {
   maker: string
   location: string
   category: BottleCategory
-}
-
-export type BottleCategory = {
-  id: string
-  name: string
+  list: ID
 }
