@@ -39,25 +39,29 @@ const bottles = computed(() => {
 </script>
 
 <template>
-  <main>
-    <section class="rich-text" v-if="winePageData" v-html="winePageData.description"></section>
-    <div class="">
-      <div class="mb-5 grid grid-cols-2 gap-2">
-        <button
-          @click="userSelectedListId = bottleList.id"
-          v-for="bottleList in bottleLists"
-          :class="{
-            'opacity-50': selectedListId !== bottleList.id
-          }"
-          class="border-b border-dark-green pb-1"
-          :key="bottleList.id"
-        >
-          <h1>{{ bottleList.name }}</h1>
-          <p class="text-balance text-xs">
+  <main class="flex h-full flex-col">
+    <section
+      class="rich-text bg-off-white"
+      v-if="winePageData"
+      v-html="winePageData.description"
+    ></section>
+    <div class="mb-5 grid grid-cols-2 gap-2">
+      <button
+        @click="userSelectedListId = bottleList.id"
+        v-for="bottleList in bottleLists"
+        :class="{
+          'opacity-50': selectedListId !== bottleList.id
+        }"
+        class="flex flex-col border-b border-dark-green pb-1 align-top"
+        :key="bottleList.id"
+      >
+        <h1>{{ bottleList.name }}</h1>
+        <!-- <p class="text-balance text-xs">
             {{ bottleList.description }}
-          </p>
-        </button>
-      </div>
+          </p> -->
+      </button>
+    </div>
+    <div class="flex-shrink overflow-y-auto">
       <section class="mb-5" v-for="category in Object.keys(bottles)" :key="category">
         <h1 class="mb-1 gap-2 border-b-dark-green text-lg font-bold uppercase">
           {{ category }}

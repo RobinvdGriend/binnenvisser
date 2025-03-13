@@ -15,6 +15,7 @@ export default {
       'brick-orange': '#d24a19',
       'dark-red': '#8a181a',
       'dark-green': '#7a5510',
+      'off-white': '#fdfdf8',
     }
   },
   plugins: []

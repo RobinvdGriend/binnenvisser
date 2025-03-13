@@ -24,20 +24,25 @@ const overlayHeight = useElementSize(overlay, undefined, { box: 'border-box' }).
 
 function formitableListener(eventName: string) {
   return function listener(e: any) {
+    console.log(e)
     // @ts-ignore
-    umami.trackEvent(eventName, e.detail)
+    umami.track(eventName, e.detail)
   }
 }
 
 const widgetOrderedListener = formitableListener('formitable-widget-ordered')
 const widgetNavigtedListener = formitableListener('formitable-widget-navigated')
+const widgetOpenedListener = formitableListener('formitable-widget-opened')
 
 // Register Formitabe events to Umami and cleanup after unmount
 onMounted(() => window.addEventListener('ft-widget-ordered', widgetOrderedListener))
 onBeforeUnmount(() => window.removeEventListener('ft-widget-ordered', widgetOrderedListener))
 
-onMounted(() => window.addEventListener('ft-widget-ordered', widgetNavigtedListener))
-onBeforeUnmount(() => window.removeEventListener('ft-widget-ordered', widgetNavigtedListener))
+onMounted(() => window.addEventListener('ft-widget-navigated', widgetNavigtedListener))
+onBeforeUnmount(() => window.removeEventListener('ft-widget-navigated', widgetNavigtedListener))
+
+onMounted(() => window.addEventListener('ft-widget-open', widgetOpenedListener))
+onBeforeUnmount(() => window.removeEventListener('ft-widget-open', widgetOpenedListener))
 
 useRouter().beforeEach((to) => {
   if (to.meta.hideLogo) {
@@ -53,7 +58,7 @@ useRouter().beforeEach((to) => {
 <template>
   <div
     :style="{ 'margin-bottom': overlayHeight + 'px' }"
-    class="grid-cols-[1fr_3fr] grid-rows-[min-content_1fr] gap-x-4 p-4 pt-2 leading-tight text-dark-green lg:grid lg:max-h-screen lg:grid-cols-4 lg:p-6 lg:pb-0"
+    class="grid-cols-[1fr_3fr] grid-rows-[min-content_1fr] gap-x-4 p-4 pt-2 leading-tight text-dark-green lg:grid lg:h-screen lg:grid-cols-4 lg:p-6 lg:pb-0"
   >
     <MenuButton
       class="ml-auto w-8 lg:hidden"
