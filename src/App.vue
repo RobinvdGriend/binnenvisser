@@ -22,14 +22,22 @@ const [mobileMenuShown, toggleMobileMenu] = useToggle(false)
 const overlay = ref<HTMLElement | null>(null)
 const overlayHeight = useElementSize(overlay, undefined, { box: 'border-box' }).height
 
-const trackFormitableInUmami = (e: any) => {
-  // @ts-ignore
-  umami.trackEvent('formitable-widget-ordered', e.detail)
+function formitableListener(eventName: string) {
+  return function listener(e: any) {
+    // @ts-ignore
+    umami.trackEvent(eventName, e.detail)
+  }
 }
 
+const widgetOrderedListener = formitableListener('formitable-widget-ordered')
+const widgetNavigtedListener = formitableListener('formitable-widget-navigated')
+
 // Register Formitabe events to Umami and cleanup after unmount
-onMounted(() => window.addEventListener('ft-widget-ordered', trackFormitableInUmami))
-onBeforeUnmount(() => window.removeEventListener('ft-widget-ordered', trackFormitableInUmami))
+onMounted(() => window.addEventListener('ft-widget-ordered', widgetOrderedListener))
+onBeforeUnmount(() => window.removeEventListener('ft-widget-ordered', widgetOrderedListener))
+
+onMounted(() => window.addEventListener('ft-widget-ordered', widgetNavigtedListener))
+onBeforeUnmount(() => window.removeEventListener('ft-widget-ordered', widgetNavigtedListener))
 
 useRouter().beforeEach((to) => {
   if (to.meta.hideLogo) {
