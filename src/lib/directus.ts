@@ -11,11 +11,13 @@ import type {
   MenuCategory,
   Bottle,
   BottleCategory,
-  BottleList
+  BottleList,
+  WinePageDescription
 } from '@/types'
 
 type Collections = {
   home: Home
+  wine_page_description: WinePageDescription,
   flat_pages: FlatPage
   events: Event
   wine_makers: WineMaker

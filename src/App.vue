@@ -10,7 +10,6 @@ import TheInfo from './components/TheInfo.vue'
 import TheLogo from './components/TheLogo.vue'
 import MenuButton from './components/MenuButton.vue'
 import { useFormitable } from '@/composables/formitable'
-import { on } from 'events'
 
 const { widgetShown } = useFormitable()
 
@@ -23,7 +22,7 @@ const [mobileMenuShown, toggleMobileMenu] = useToggle(false)
 const overlay = ref<HTMLElement | null>(null)
 const overlayHeight = useElementSize(overlay, undefined, { box: 'border-box' }).height
 
-const trackFormitableInUmami = (e) => {
+const trackFormitableInUmami = (e: any) => {
   // @ts-ignore
   umami.trackEvent('formitable-widget-ordered', e.detail)
 }
