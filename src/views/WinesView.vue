@@ -41,11 +41,11 @@ const bottles = computed(() => {
 <template>
   <main class="flex h-full flex-col">
     <section
-      class="rich-text bg-off-white"
+      class="rich-text mb-5 bg-off-white"
       v-if="winePageData"
       v-html="winePageData.description"
     ></section>
-    <div class="mb-5 grid grid-cols-2 gap-2">
+    <div class="grid grid-cols-2 gap-2">
       <button
         @click="userSelectedListId = bottleList.id"
         v-for="bottleList in bottleLists"
@@ -56,13 +56,10 @@ const bottles = computed(() => {
         :key="bottleList.id"
       >
         <h1>{{ bottleList.name }}</h1>
-        <!-- <p class="text-balance text-xs">
-            {{ bottleList.description }}
-          </p> -->
       </button>
     </div>
-    <div class="flex-shrink overflow-y-auto">
-      <section class="mb-5" v-for="category in Object.keys(bottles)" :key="category">
+    <div class="shrink overflow-y-auto">
+      <section class="mb-5 first:mt-5" v-for="category in Object.keys(bottles)" :key="category">
         <h1 class="mb-1 gap-2 border-b-dark-green text-lg font-bold uppercase">
           {{ category }}
         </h1>
