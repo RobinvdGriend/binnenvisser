@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref } from 'vue'
+import { ref } from 'vue'
 import { breakpointsTailwind, useBreakpoints, useElementSize } from '@vueuse/core'
 import { RouterView, useRouter } from 'vue-router'
 import { useToggle } from '@vueuse/core'
@@ -9,9 +9,6 @@ import TheMenu from './components/TheMenu.vue'
 import TheInfo from './components/TheInfo.vue'
 import TheLogo from './components/TheLogo.vue'
 import MenuButton from './components/MenuButton.vue'
-import { useFormitable } from '@/composables/formitable'
-
-const { widgetShown } = useFormitable()
 
 const hideLogo = ref<boolean>(false)
 
@@ -21,28 +18,6 @@ const [mobileMenuShown, toggleMobileMenu] = useToggle(false)
 
 const overlay = ref<HTMLElement | null>(null)
 const overlayHeight = useElementSize(overlay, undefined, { box: 'border-box' }).height
-
-function formitableListener(eventName: string) {
-  return function listener(e: any) {
-    console.log(e)
-    // @ts-ignore
-    umami.track(eventName, e.detail)
-  }
-}
-
-const widgetOrderedListener = formitableListener('formitable-widget-ordered')
-const widgetNavigtedListener = formitableListener('formitable-widget-navigated')
-const widgetOpenedListener = formitableListener('formitable-widget-opened')
-
-// Register Formitabe events to Umami and cleanup after unmount
-onMounted(() => window.addEventListener('ft-widget-ordered', widgetOrderedListener))
-onBeforeUnmount(() => window.removeEventListener('ft-widget-ordered', widgetOrderedListener))
-
-onMounted(() => window.addEventListener('ft-widget-navigated', widgetNavigtedListener))
-onBeforeUnmount(() => window.removeEventListener('ft-widget-navigated', widgetNavigtedListener))
-
-onMounted(() => window.addEventListener('ft-widget-open', widgetOpenedListener))
-onBeforeUnmount(() => window.removeEventListener('ft-widget-open', widgetOpenedListener))
 
 useRouter().beforeEach((to) => {
   if (to.meta.hideLogo) {
@@ -75,10 +50,7 @@ useRouter().beforeEach((to) => {
       <TheLogo class="mt-10 h-32" />
     </RouterLink>
 
-    <div
-      class="fixed bottom-0 right-0 hidden w-1/4 items-end justify-end pr-6 lg:flex"
-      :class="widgetShown ? 'mb-20' : 'mb-6'"
-    >
+    <div class="fixed bottom-0 right-0 mb-6 hidden w-1/4 items-end justify-end pr-6 lg:flex">
       <TheInfo />
       <RouterLink class="shrink-0" to="/">
         <TheLogo class="ml-3 h-48" />

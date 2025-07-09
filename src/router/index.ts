@@ -8,10 +8,6 @@ import MenuView from '@/views/MenuView.vue'
 import WinesView from '@/views/WinesView.vue'
 import InfoView from '@/views/InfoView.vue'
 
-import { useFormitable } from '@/composables/formitable'
-
-const { widgetShown } = useFormitable()
-
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -51,15 +47,6 @@ const router = createRouter({
       component: FlatPageView
     }
   ]
-})
-
-router.beforeEach((to) => {
-  console.log(to.path)
-  if (['/reservations', '/', '/events'].includes(to.path)) {
-    widgetShown.value = true
-  } else {
-    widgetShown.value = false
-  }
 })
 
 export default router
