@@ -60,7 +60,6 @@ export type WineMaker = {
 export type InstagramFeedItem = {
   id: string
   mediaUrl: string
-  dominantColor: string
   permalink: string
 }
 

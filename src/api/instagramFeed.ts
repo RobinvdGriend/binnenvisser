@@ -8,7 +8,6 @@ export async function getInstagramFeed(): Promise<InstagramFeedItem[]> {
   return rawFeed.map((item) => ({
     id: item.id,
     mediaUrl: item.mediaUrl,
-    dominantColor: item.colorPalette.dominant,
     permalink: item.permalink,
   }))
 }
