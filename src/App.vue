@@ -50,7 +50,7 @@ useRouter().beforeEach((to) => {
       <TheLogo class="mt-10 h-32" />
     </RouterLink>
 
-    <div class="fixed bottom-0 right-0 mb-6 hidden w-1/4 items-end justify-end pr-6 lg:flex">
+    <div class="fixed bottom-0 right-0 mb-20 hidden w-1/4 items-end justify-end pr-6 lg:flex">
       <TheInfo />
       <RouterLink class="shrink-0" to="/">
         <TheLogo class="ml-3 h-48" />
