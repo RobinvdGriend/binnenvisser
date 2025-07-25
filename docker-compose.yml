@@ -15,7 +15,7 @@ services:
   cms:
     image: directus/directus:10.5
     ports:
-      - 8010:8055
+      - ${PORT:-8010}:8055
     volumes:
       # By default, uploads are stored in /directus/uploads
       # Always make sure your volumes matches the storage root when using
