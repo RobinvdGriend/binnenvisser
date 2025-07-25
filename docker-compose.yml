@@ -4,7 +4,7 @@ services:
     image: robinvdgriend/binnenvisser:latest
     build: .
     ports:
-      - 127.0.0.1:8011:80
+      - 127.0.0.1:${FRONTEND_PORT:-8011}:80
 
   cache:
     container_name: binnenvisser_cache
@@ -15,7 +15,7 @@ services:
   cms:
     image: directus/directus:10.5
     ports:
-      - ${PORT:-8010}:8055
+      - ${CMS_PORT:-8010}:8055
     volumes:
       # By default, uploads are stored in /directus/uploads
       # Always make sure your volumes matches the storage root when using
