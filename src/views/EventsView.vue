@@ -28,7 +28,7 @@ const pastEvents = computed(
   <main>
     <section class="mb-4">
       <h1 class="mb-4">upcoming events:</h1>
-      <div class="grid grid-cols-2">
+      <div class="grid grid-cols-2 gap-4">
         <EventsItem
           v-for="event in upcomingEvents"
           :event="event"
