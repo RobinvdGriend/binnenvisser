@@ -1,7 +1,6 @@
 version: '3'
 services:
   website:
-    image: robinvdgriend/binnenvisser:latest
     build: .
     ports:
       - 127.0.0.1:${FRONTEND_PORT:-8011}:80
