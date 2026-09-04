@@ -48,5 +48,8 @@ services:
       # (see https://docs.directus.io/self-hosted/config-options#general)
       PUBLIC_URL: 'https://binnenvisser.nl/cms'
 
+      # Users consistently upload images larger than the default maximum
+      ASSETS_TRANSFORM_IMAGE_MAX_DIMENSION: 10000
+
 networks:
   directus:
