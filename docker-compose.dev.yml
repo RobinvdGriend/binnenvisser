@@ -1,0 +1,49 @@
+# Local development override.
+#
+# Usage:
+#   docker compose -f docker-compose.yml -f docker-compose.dev.yml up
+#
+# Adds a local Postgres and repoints the CMS at it, so you never touch the
+# production DigitalOcean database while developing (e.g. testing the bottle
+# import, which hard-deletes rows).
+
+services:
+  db:
+    image: postgres:15
+    container_name: binnenvisser_db_dev
+    networks:
+      - directus
+    environment:
+      POSTGRES_USER: binnenvisser
+      POSTGRES_PASSWORD: binnenvisser
+      POSTGRES_DB: binnenvisser
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+    ports:
+      # Exposed on localhost only, for inspecting the DB with a client if needed.
+      - 127.0.0.1:5432:5432
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U binnenvisser -d binnenvisser']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  cms:
+    depends_on:
+      cache:
+        condition: service_started
+      db:
+        condition: service_healthy
+    environment:
+      # Override the production connection string from docker-compose.yml.
+      DB_CONNECTION_STRING: 'postgresql://binnenvisser:binnenvisser@db:5432/binnenvisser'
+      # Fresh local DB has no admin — create one on first bootstrap so you can log in.
+      ADMIN_EMAIL: 'admin@example.com'
+      ADMIN_PASSWORD: 'admin'
+
+      ROOT_REDIRECT: ''
+      # Make sure to set this in production
+      # (see https://docs.directus.io/self-hosted/config-options#general)
+      PUBLIC_URL: ''
+
+

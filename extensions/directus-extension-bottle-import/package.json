@@ -1,0 +1,29 @@
+{
+  "name": "directus-extension-bottle-import",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "description": "Monthly xlsx -> bottles sync (per-list, upsert + hard delete of missing rows)",
+  "directus:extension": {
+    "type": "bundle",
+    "path": { "app": "dist/app.js", "api": "dist/api.js" },
+    "entries": [
+      { "type": "module", "name": "bottle-import-module", "source": "src/module/index.ts" },
+      { "type": "endpoint", "name": "bottle-import", "source": "src/endpoint/index.ts" }
+    ],
+    "host": "^10.1.11"
+  },
+  "scripts": {
+    "build": "directus-extension build",
+    "dev": "directus-extension build -w --no-minify",
+    "link": "directus-extension link"
+  },
+  "dependencies": {
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "@directus/extensions-sdk": "^10.1.11",
+    "typescript": "^5.0.4",
+    "vue": "^3.3.4"
+  }
+}

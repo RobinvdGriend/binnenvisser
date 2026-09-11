@@ -11,6 +11,10 @@ node_modules
 .DS_Store
 dist
 dist-ssr
+
+# Built Directus extensions must be committed (deploy.sh only does git pull)
+!/extensions/directus-extension-bottle-import/dist/
+!/extensions/directus-extension-bottle-import/dist/**
 coverage
 *.local
 .env
