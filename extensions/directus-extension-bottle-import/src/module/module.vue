@@ -30,6 +30,7 @@ type ParsedBottle = {
 	[key: string]: string;
 };
 type ListResult = { listId: string | number; created: number; updated: number; deleted: number };
+type CategoryNode = { name: string; count: number };
 
 const api = useApi();
 
@@ -45,6 +46,16 @@ const error = ref('');
 
 const tabOptions = computed(() => sheetNames.value.map((n) => ({ text: n, value: n })));
 const hasMapping = computed(() => Object.values(mapping).some((v) => !!v));
+
+// Detected categories (with wine counts) per mapped list, for the preview tree.
+const analyses = computed<Record<string, CategoryNode[]>>(() => {
+	const out: Record<string, CategoryNode[]> = {};
+	if (!workbook.value) return out;
+	for (const [listId, sheet] of Object.entries(mapping)) {
+		if (sheet) out[listId] = analyzeSheet(sheet).tree;
+	}
+	return out;
+});
 const isPreview = computed(() => result.value?.dryRun === true);
 const isDone = computed(() => result.value?.dryRun === false);
 const totalDeletes = computed(() =>
@@ -89,11 +100,13 @@ async function onFile(event: Event) {
 	}
 }
 
-function parseSheet(sheetName: string): ParsedBottle[] {
+function analyzeSheet(sheetName: string): { bottles: ParsedBottle[]; tree: CategoryNode[] } {
 	const ws = workbook.value!.Sheets[sheetName];
 	const rows = XLSX.utils.sheet_to_json<any[]>(ws, { header: 1, blankrows: false, defval: '' });
 	const bottles: ParsedBottle[] = [];
+	const tree: CategoryNode[] = [];
 	let category = '';
+	let node: CategoryNode | null = null;
 
 	for (const row of rows) {
 		const cells = (row as any[]).map((c) => String(c ?? '').trim());
@@ -103,11 +116,18 @@ function parseSheet(sheetName: string): ParsedBottle[] {
 		// Category delimiter: only the first column is populated.
 		if (nonEmpty.length === 1 && cells[0] !== '') {
 			category = cells[0];
+			node = { name: category, count: 0 };
+			tree.push(node);
 			continue;
 		}
 
 		const name = cells[COLUMN.name] ?? '';
 		if (!name) continue;
+
+		if (!node) {
+			node = { name: '(no category)', count: 0 };
+			tree.push(node);
+		}
 
 		const bottle: ParsedBottle = {
 			name,
@@ -118,15 +138,16 @@ function parseSheet(sheetName: string): ParsedBottle[] {
 		};
 		if (TYPE_TARGET_FIELD) bottle[TYPE_TARGET_FIELD] = cells[COLUMN.type] ?? '';
 		bottles.push(bottle);
+		node.count++;
 	}
 
-	return bottles;
+	return { bottles, tree };
 }
 
 function buildPayload(dryRun: boolean) {
 	const mappedLists = Object.entries(mapping)
 		.filter(([, sheet]) => !!sheet)
-		.map(([listId, sheet]) => ({ listId, bottles: parseSheet(sheet as string) }));
+		.map(([listId, sheet]) => ({ listId, bottles: analyzeSheet(sheet as string).bottles }));
 	return { dryRun, typeField: TYPE_TARGET_FIELD, lists: mappedLists };
 }
 
@@ -161,14 +182,22 @@ const commit = () => run(false);
 			<div v-if="sheetNames.length" class="block">
 				<p class="type-label">2 · Map each list to a tab</p>
 				<p class="muted">Leave a list unset to skip it — nothing in that list will change.</p>
-				<div v-for="list in lists" :key="list.id" class="map-row">
-					<span class="map-name">{{ list.name }}</span>
-					<v-select
-						v-model="mapping[list.id]"
-						:items="tabOptions"
-						placeholder="— don't sync —"
-						show-deselect
-					/>
+				<div v-for="list in lists" :key="list.id" class="map-block">
+					<div class="map-row">
+						<span class="map-name">{{ list.name }}</span>
+						<v-select
+							v-model="mapping[list.id]"
+							:items="tabOptions"
+							placeholder="— don't sync —"
+							show-deselect
+						/>
+					</div>
+					<ul v-if="mapping[list.id] && analyses[list.id]" class="tree">
+						<li v-for="node in analyses[list.id]" :key="node.name" class="tree-cat">
+							<span class="tree-name">{{ node.name }}</span>
+							<span class="tree-count">{{ node.count }} wine{{ node.count === 1 ? '' : 's' }}</span>
+						</li>
+					</ul>
 				</div>
 				<div class="actions">
 					<v-button :loading="loading" :disabled="!hasMapping" @click="preview">
@@ -242,6 +271,27 @@ const commit = () => run(false);
 .map-name {
 	flex: 0 0 220px;
 	font-weight: 600;
+}
+.map-block {
+	margin-bottom: 16px;
+}
+.tree {
+	list-style: none;
+	margin: 8px 0 0 236px;
+	padding: 8px 12px;
+	background: var(--background-subdued);
+	border-radius: var(--border-radius);
+}
+.tree-cat {
+	padding: 2px 0;
+}
+.tree-name {
+	font-weight: 600;
+}
+.tree-count {
+	margin-left: 8px;
+	color: var(--foreground-subdued);
+	font-size: 12px;
 }
 .actions {
 	margin-top: 16px;
