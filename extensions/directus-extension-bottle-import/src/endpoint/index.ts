@@ -1,4 +1,5 @@
 import { defineEndpoint } from '@directus/extensions-sdk';
+import { canUseBottleImport } from '../shared/access';
 
 /**
  * POST /bottle-import/sync
@@ -36,8 +37,11 @@ export default defineEndpoint((router, { services, getSchema }) => {
 	const { ItemsService } = services;
 
 	router.post('/sync', async (req: any, res: any) => {
-		if (!req.accountability?.admin) {
-			return res.status(403).json({ errors: [{ message: 'Bottle import is admin-only.' }] });
+		// accountability.permissions is filled in by Directus' getPermissions middleware.
+		if (!canUseBottleImport(req.accountability?.admin === true, req.accountability?.permissions)) {
+			return res
+				.status(403)
+				.json({ errors: [{ message: 'You lack the permissions needed for the bottle import.' }] });
 		}
 
 		const dryRun: boolean = req.body?.dryRun !== false; // default to a safe dry run

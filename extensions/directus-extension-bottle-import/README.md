@@ -4,7 +4,7 @@ Monthly manual import of the bottle workbook (`.xlsx`) into Directus.
 
 - **Module** (`Bottle Import` in the sidebar): the client uploads the workbook, maps
   each `bottle_lists` entry to a worksheet tab, previews the changes, then confirms.
-- **Endpoint** (`POST /bottle-import/sync`, admin-only): syncs the mapped tabs.
+- **Endpoint** (`POST /bottle-import/sync`): syncs the mapped tabs.
 
 ## What it does
 
@@ -57,4 +57,15 @@ negation), and `docker-compose.yml` mounts `./extensions` into the container.
 ## Enable the module
 
 After deploy, in Directus: **Settings → Project Settings → Modules** → enable
-**Bottle Import**. It then appears in the left sidebar for admins.
+**Bottle Import**. It then appears in the left sidebar for users who may use it.
+
+## Access
+
+Admins always have access. Any other role gets access (sidebar entry + endpoint) when it
+has **all** of these permissions, set under **Settings → Roles & Permissions**:
+
+- `bottles`: read, create, update, delete
+- `bottle_categories`: read, create
+- `bottle_lists`: read
+
+The list lives in [`src/shared/access.ts`](src/shared/access.ts).
