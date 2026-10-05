@@ -32,8 +32,8 @@ useRouter().beforeEach((to) => {
 
 <template>
   <div
-    :style="{ 'margin-bottom': overlayHeight + 'px' }"
-    class="mt-8 grid-cols-[1fr_3fr] grid-rows-[min-content_1fr] gap-x-4 p-4 pt-2 leading-tight text-dark-green lg:grid lg:h-screen lg:grid-cols-4 lg:p-6 lg:pb-0"
+    :style="{ 'padding-bottom': overlayHeight + 'px' }"
+    class="grid-cols-[1fr_3fr] grid-rows-[min-content_1fr] gap-x-4 p-4 pt-10 leading-tight text-dark-green lg:grid lg:h-screen lg:grid-cols-4 lg:px-6 lg:pt-12"
   >
     <MenuButton
       class="ml-auto w-8 lg:hidden"
