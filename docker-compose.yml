@@ -14,7 +14,7 @@ services:
   cms:
     image: directus/directus:10.5
     ports:
-      - ${CMS_PORT:-8010}:8055
+      - 127.0.0.1:${CMS_PORT:-8010}:8055
     volumes:
       # By default, uploads are stored in /directus/uploads
       # Always make sure your volumes matches the storage root when using
@@ -30,7 +30,8 @@ services:
       - cache
     environment:
       KEY: '5df5b2d0-f508-4e00-9101-ac7ef1c5fa09'
-      SECRET: 'b87e2233-cbbd-48f4-a922-09d6bd27547b'
+      # Signs auth tokens. Keep it out of git: set DIRECTUS_SECRET in .env
+      SECRET: '${DIRECTUS_SECRET:?Set DIRECTUS_SECRET in .env}'
 
       DB_CLIENT: 'pg'
       DB_CONNECTION_STRING: 'postgresql://binnenvisser:${DB_PASSWORD}@db-autechre-do-user-6290931-0.b.db.ondigitalocean.com:25060/binnenvisser?sslmode=no-verify'
